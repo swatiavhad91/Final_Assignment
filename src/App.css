@@ -22,3 +22,92 @@ li
 {
   background-color: wheat;
 }
+ .advantages
+{
+  display: flex;
+  width: 40%;
+  margin: 0 auto;
+  text-align: justify;
+} 
+
+.high_quality
+{
+  display: flex;
+  width: 100%;
+  height: 30%;
+  background-color: rgb(247,241,212);
+  justify-content: space-evenly;
+}
+.quality1{
+  display: flex;
+  flex-direction: column;
+width: 33%;
+text-align: center;
+
+}
+.quality2{
+  display: flex;
+  flex-direction: column;
+width: 33%;
+text-align: center;
+
+
+}
+.quality3{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+width: 33%;
+
+}
+
+.top_products
+{
+  display: flex;
+  margin-top: 2%;
+  justify-content: space-around
+}
+.tab_container
+{
+  display: flex;
+  
+}
+.tabbed_component
+{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  
+}
+
+.footer
+{
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+.foot_content1
+{
+  display: flex;
+  flex-direction: column;
+  border: solid 1px gray;
+  width: 33.4%;
+  text-align: center;
+}
+.foot_content2
+{
+  display: flex;
+  flex-direction: column;
+  border: solid 1px gray;
+  width: 33.4%;
+  text-align: center;
+}
+.foot_content3
+{
+  display: flex;
+  flex-direction: column;
+  border: solid 1px gray;
+  width: 33.4%;
+  text-align: center;
+}

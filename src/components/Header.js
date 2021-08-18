@@ -5,10 +5,10 @@ import { NavLink, Redirect } from "react-router-dom";
 function Header() {
     return (
 
-        <nav className="navbar navbar-expand-lg navbar-dark  static-top" >
+        <nav className="navbar navbar-expand-lg navbar-dark  static-top">
             <div className="container" >
                 <a className="navbar-brand" href="#">
-                    <img src="https://placeholder.pics/svg/150x50/888888/EEE/Logo" alt="..." height="36" />
+                    <img src="https://placeholder.pics/svg/150x50/888888/EEE/Logo" alt="..." height="30" />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
