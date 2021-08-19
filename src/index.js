@@ -12,9 +12,9 @@ import Blogs from "./components/Blogs";
 import Cart from "./components/Cart";
 import Men from "./components/Men";
 import Women from "./components/Women";
-import Jewelery from "./components/Jewelery"
-import "./App.css"
+import Jewelery from "./components/Jewelery";
 import Our_journey from "./components/Our_journey";
+import "./App.css"
 
 
 const routing = (

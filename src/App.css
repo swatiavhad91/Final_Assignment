@@ -111,3 +111,15 @@ width: 33%;
   width: 33.4%;
   text-align: center;
 }
+.container
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.shoes_container
+{
+  display: flex;
+  justify-content: space-between;
+  border: solid 2px black;
+}

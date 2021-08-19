@@ -98,12 +98,14 @@ export default function Home() {
         </p>
   </div>
 </div>
+
 <h3 style={{marginTop:"3%",textAlign:"center"}}>Some top products for you</h3>
 <div className="top_products">
 
 <div className="tabbed_component">
 <ul className="nav nav-tabs">
   <Link to="men">Men</Link>
+  
   </ul>
   </div>
   
@@ -117,15 +119,17 @@ export default function Home() {
   <div className="tabbed_component">
 <ul className="nav nav-tabs">
 <Link to="jewelery">Jewelery</Link>
+
   </ul>
   </div>
  </div>
+{/* <div className="shoes_container" style={{marginTop:"5%"}}>
+
+  <img src="../Assets/shoes1.png"></img>
+  <img src="../Assets/shoes2.jpg" ></img>
+  </div> */}
 
 </div>
-
-
-
-
 
         
     )

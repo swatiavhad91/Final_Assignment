@@ -69,13 +69,13 @@ function Footer() {
         </div>
 
         <div style={{ marginTop: "3%" }}>
-          <a href="https://www.instagram.com/">
+          <a href="https://www.instagram.com/" target="_blank">
         <i class="fab fa-instagram"></i></a>
         <span style={{ marginLeft: "5%" }}>Username</span>
         </div>
 
         <div style={{ marginTop: "3%" }}>
-          <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>        
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>        
         <span style={{ marginLeft: "5%" }}>Username</span>
         </div>
 
