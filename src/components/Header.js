@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 
 
 function Header() {
@@ -19,7 +19,7 @@ function Header() {
                     <ul className="navbar-nav ms-auto" >
                         <li className="nav-item" id="home">
                             {/* <a class="nav-link active" aria-current="page" href="">Home</a> */}
-                            <NavLink exact activeClassName="active" to="/" style={{textDecoration:"none", color:"black",
+                            <NavLink exact activeClassName="active" to="/home" style={{textDecoration:"none", color:"black",
                               fontFamily:"sans-serif", fontSize:"larger"}} >
                                 Home
                             </NavLink>
@@ -67,7 +67,7 @@ function Header() {
                                 <li><a className="dropdown-item" href="#">My Cart</a></li>
                                 <li><a className="dropdown-item" href="#">My Wishlist</a></li>
 
-                                <li><a className="dropdown-item" href="#">Logout</a>
+                                <li><Link to="/" style={{textDecoration:"none"}}>Logout</Link>
 
                                 </li>
                                 

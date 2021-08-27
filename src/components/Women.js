@@ -31,8 +31,8 @@ class Women extends Component {
            <img  src={user.image} class="card-img-top"  alt="..." height="20%"/>
            
                <h5 className="card-title">{user.title}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">{"Price : "+user.price}</h6>
-              <h6 className="card-subtitle mb-2 text-muted">{"Description : "+user.description}</h6>
+              <h6 className="card-subtitle mb-2 ">{"Price :  "+user.price}</h6>
+              <h6 className="card-subtitle mb-2 ">{"Description : "+user.description}</h6>
               
             </div>
           </div>

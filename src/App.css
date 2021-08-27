@@ -147,4 +147,61 @@ width: 33%;
   margin-bottom: 1%;
 }
 
+.products_container
+{
+  display: flex;
+  border: solid 2px black;
+}
+.pagination {
+  margin: 10px auto;
+  display: flex;
+  
+
+  list-style: none;
+  outline: none;
+  font-weight: bold;
+}
+.pagination > .active > a{
+  background-color: #47ccde ;
+  border-color: #47ccde ;
+  color: #fff;
+}
+.pagination > li > a{
+  border: 2px solid #47ccde ;
+  padding: 2px 5px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+  background-color: #47ccde ;
+  border-color: #47ccde;
+  outline: none ;
+}
+.pagination > li > a, .pagination > li > span{
+  color: #47ccde
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+  border-radius: unset
+}
+.front_page
+{
+  display: flex;
+  margin: 1%;
+
+}
+.form_container
+{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: #F8F8F8;
+  
+}
+.image_Container
+{
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  
+}
 
