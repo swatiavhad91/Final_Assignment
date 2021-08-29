@@ -111,11 +111,18 @@ width: 33%;
   width: 33.4%;
   text-align: center;
 }
-.container
+.women_container
 {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
+} 
+.men_container{
+  display: flex;
+  justify-content: space-evenly;
+}
+.jewelery_container{
+  display: flex;
+  justify-content: space-evenly;
 }
 .shoes_container
 {

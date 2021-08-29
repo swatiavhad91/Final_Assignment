@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
+import Header from './Header';
+import Footer from './Footer';
 
 
 export default class Albums extends Component {
@@ -61,6 +63,7 @@ export default class Albums extends Component {
     render() {
         return (
             <div>
+                <Header/>
                 {this.state.postData}
                 <ReactPaginate
                     previousLabel={"prev"}
@@ -74,6 +77,7 @@ export default class Albums extends Component {
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"}/>
+                    <Footer/>
             </div>
 
         )

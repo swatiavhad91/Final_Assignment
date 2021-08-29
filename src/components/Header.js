@@ -64,7 +64,7 @@ function Header() {
                                 </svg>
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#">My Cart</a></li>
+                                <li><Link to="cart">My Cart</Link></li>
                                 <li><a className="dropdown-item" href="#">My Wishlist</a></li>
 
                                 <li><Link to="/" style={{textDecoration:"none"}}>Logout</Link>

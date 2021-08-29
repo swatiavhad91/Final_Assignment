@@ -1,49 +1,440 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react'
+import Footer from './Footer';
+import Header from './Header';
+import { Link } from 'react-router-dom';
 
-const API_URL = 'https://fakestoreapi.com/products/category/men%27s%20clothing';
 
-class Men extends Component {
-  state = {
-    users: []
+// VARIABLES
+var total = 0;
+var gross = 0;
+var tax = 0;
+
+var totalFormat;
+var grossFormat;
+var taxFormat;
+
+var selectedSize;
+var selectedIndex;
+
+var itemsArray = [];
+var products = [{
+      name: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+      url: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+      price: 109.95
+    },{
+      name: 'Mens Casual Premium Slim Fit T-Shirts',
+      url: 'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
+      price: 22.3
+    },{name: 'Mens Cotton Jacket',
+       url: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
+      price: 55.99
+    },
+    {name: 'Mens Casual Slim Fit',
+       url: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
+      price: 15.99
+    }]
+
+//SHOPPING CART - SHOPPING
+
+class SizeButton extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      className: 'size-button',
+      clicked: 0
+    }
   }
-  componentDidMount() {
-    const url = `${API_URL}`;
-    axios.get(url).then(response => response.data)
-    .then((data) => {
-      this.setState({ users: data })
-      console.log(this.state.users)
-     })
-  }
-  render() {
-
-    return (
-      <div>
-      <div>
-        <h1 style={{textAlign:"center"}}>Men's Clothings</h1></div>
-       <div className="container">
-        {/* <div className="col-xs-8"> */}
-          
-        {this.state.users.map((user) => (
-                 <div className="card" style={{width: "30%"}}>
-             
-           <div className="card-body">
-          
-           <img  src={user.image} class="card-img-top"  alt="..." />
-           
-               <h5 className="card-title">{user.title}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">{"Price : "+user.price}</h6>
-              <h6 className="card-subtitle mb-2 text-muted">{"Description : "+user.description}</h6>
-              
-            </div>
-          </div>
-          
-
-        ))}
-        </div>
+  
+  //ANIMATE IF SIBLING BUTTON CLICKED
+  componentWillReceiveProps(nextProps){
+     
+    //HAS THE ADD BUTTON BEEN CLICKED
+    if(nextProps.productCardIsClicked != this.state.clicked){
        
-       </div>
+      //WAS THIS THE SIBLING BUTTON
+      if(nextProps.productCardClickedIndex == this.props.value){
+
+        //ANIMATION
+        //ADD TRANSITION CLASS
+        this.setState({
+          className: "size-button size-alert"
+        });
+
+        //REMOVE FOR REUSABILITY
+        setTimeout(() => {
+          this.setState({
+            clicked: this.state.clicked + 1,
+            className: "size-button"
+          });
+        }, 300);
+      }
+    }
+  }
+  
+  //SET THE DESIRED SIZE - REVERTS TO NULL AFTER APPLICATION FUNCTION
+  clickHandler(size){
+    selectedSize = size;
+    selectedIndex = this.props.value;
+  }
+  
+  render(){
+    const sizeDisplay = this.props.productCardSize;
+    const sizeLetter = sizeDisplay.charAt(0);
+    const btnValue = this.props.value;
+    
+    return(
+      
+      <div className="product-size">
+        <button className={this.state.className} onClick={this.clickHandler.bind(this, sizeDisplay, btnValue)}>{sizeLetter}</button>
+      </div>
     );
   }
 }
-export default Men;
+
+
+
+class AddToCartButton extends React.Component {
+  
+  render(){
+    var price = this.props.productCardPrice;
+    var item = this.props.productCardName;
+    var index = this.props.productCardIndex;
+    
+    return(
+      <button value={this.props.productCardIndex} onClick={this.props.productCardClick.bind(this, price, item, index)}>Add</button>
+    );
+  }
+}
+
+class ProductCard extends React.Component {
+  
+  render(){
+    var url = this.props.background;
+    var value = this.props.value;
+    
+    return(
+      <div className="product-card-container">
+        
+        <div className="product-card-top" style={{backgroundImage: `url(${url})`}}>
+          <div className="product-card-price">
+            <div className="price-sign">
+              <i class="fa fa-rupee" style={{color:"white"}}></i>
+            </div>
+            <div className="price-amount">
+              <h4>{this.props.productsPrice}</h4>
+            </div>
+          </div>
+        </div>
+        <div className="product-card-bottom">
+          <div className="card-bottom-wrapper">
+            <div className="card-bottom-inside">
+              <div className="product-title">
+                <h3>{this.props.name}</h3>
+              </div>
+              <div className="product-selection">
+                  <div className="size-selection">
+                      <SizeButton productCardIsClicked={this.props.productsIsClicked} productCardClickedIndex={this.props.productsClickedIndex} productCardSize="Small" value={value}/>
+                      <SizeButton productCardIsClicked={this.props.productsIsClicked} productCardClickedIndex={this.props.productsClickedIndex} productCardSize="Medium" value={value}/>
+                      <SizeButton productCardIsClicked={this.props.productsIsClicked} productCardClickedIndex={this.props.productsClickedIndex} productCardSize="Large" value={value}/>
+                    </div>
+                <div className="product-checkout">
+                  <AddToCartButton productCardClick={this.props.productsClick} productCardPrice={this.props.productsPrice} productCardIndex={this.props.value} productCardName={this.props.name}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Products extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      clicked: 1,
+      className: "size-button"
+    }
+  }
+  
+  render(){
+    
+    //CREATE PRODUCT CARDS
+    var productElements = Object.keys(products).map((key, i) => {
+      return(
+        <ProductCard key={i} value={i} name={products[i].name} productsPrice={products[i].price} productsIsClicked={this.props.orderScreenIsClicked} productsClick={this.props.orderScreenClick} productsClickedIndex={this.props.orderScreenClickedIndex} background={products[i].url}/>
+      );
+    });
+    
+    return(
+      <div id="products-container">
+        {productElements}
+     </div>
+    );
+  }
+}
+
+class ShoppingCart extends React.Component {
+  render(){
+    var grossAmount = this.props.gross;
+    
+    return(
+      <div>
+        
+      <div id="shoppingCart-container">
+        <div id="shoppingCart-top">
+          <h1>Shopping Cart</h1>
+        </div>
+        <div id="shoppingCart-bottom">
+          <h3>Gross: {grossFormat}</h3>
+          <h3>Tax: {taxFormat}</h3>
+          <h2>Total: {totalFormat}</h2>
+          <div id="checkout-button-container">
+            <button id="checkout-button" onClick={this.props.orderScreenSwitch.bind(this, 1)}>Check Out</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    );
+  }
+}
+
+class OrderScreen extends React.Component {
+  
+  
+  
+  render(){
+    return(
+      <div id="order-container" className={this.props.applicationClass}>
+        <Products orderScreenIsClicked={this.props.applicationClicked} orderScreenClick={this.props.applicationClick} orderScreenClickedIndex={this.props.applicationClickedIndex}/>
+        <ShoppingCart orderScreenSwitch={this.props.applicationScreenSwitch}/>
+      </div>
+    );
+  }
+}
+
+//SHOPPING CART - CHECK OUT
+class ItemRow extends React.Component {
+  render(){
+    var index = this.props.checkOutIndex;
+    
+    return(
+      <tr>
+        <td data-title="name">{this.props.checkOutName}</td>
+        <td data-title="size">{this.props.checkOutSize}</td>
+        <td data-title="price">{this.props.checkOutPrice}</td>
+        <td className="td-remove" data-title="remove">
+          <button className="remove-button" onClick={this.props.checkOutRemoveClick.bind(this, index)}>-</button>
+        </td>
+      </tr>
+    )
+  }
+}
+
+class CheckOut extends React.Component {
+  render(){
+    var tableRows = Object.keys(itemsArray).map((key, i) => {
+      
+      return(<ItemRow checkOutName={itemsArray[i].itemType} checkOutSize={itemsArray[i].size.charAt(0)} checkOutPrice={itemsArray[i].price} checkOutIndex={i} checkOutRemoveClick={this.props.applicationRemoveClick}/>)
+    })
+    
+    return(
+      <div id="checkout-container">
+        <div id="checkout-container-wrapper">
+          <div id="checkout-container-inside">
+            <div id="back-button-container">
+            <button className="checkout-button" onClick={this.props.applicationScreenSwitch.bind(this, 2)}>Back</button>
+            </div>
+            <div id="shoppingcart-list-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows}
+                </tbody>
+              </table>
+            </div>
+            <div id="shoppingcart-checkout-container">
+              <div id="shoppingcart-total">
+                <h2>Total: {totalFormat}</h2>
+              </div>
+              <div id="shoppingcart-checkout-button">
+                <button className="checkout-button">Check Out</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+//SHOPPING CART - APP
+class Men extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      orderFade: '',
+      containerSlide: '',
+      clickedIndex: null,
+      items: null
+    }
+    
+    this.screenSwitch = this.screenSwitch.bind(this);
+    this.applicationClick = this.applicationClick.bind(this);
+    this.removeClick = this.removeClick.bind(this);
+  }
+  
+  //SCREEN SWITCH ANIMATION
+  screenSwitch(x){
+    if(x == 1){
+      this.setState({
+        orderFade: 'order-container-fade',
+        containerSlide: 'screen-swipe'
+      })
+    }if(x == 2){
+      this.setState({
+        orderFade: '',
+        containerSlide: ''
+      })
+    }
+  }
+  
+  //UPDATES UI ON ADD BUTTON CLICK
+  //THIS IS PASSED TO ADD BUTTON
+  //GETS INFORMATION FROM SIZE BUTTONS
+  applicationClick(amount, item, index){
+    
+    //IF SELECTED SIZE IS BLANK NOTIFY THAT SIZE NEEDS TO BE SELECTED
+    if(selectedSize == null){
+      
+      //DETERMINE WHERE THE BUTTON CLICKED IS LOCATED SO YOU CAN PIN POINT SIBLING SIZE BUTTONS
+      // var newIndex = Event.target.value;
+      
+      // this.setState({
+      //   clicked: this.state.clicked + 1,
+      //   clickedIndex: newIndex
+      // });
+      alert("Please select a size.." );
+      return;
+      
+    //IF SIZE AT CARD WHERE BUTTON IS CLICKED IS SELECTED UPDATE UI AND SHOPPING CART ARRAY
+    }
+    if(selectedSize != null && selectedIndex == index){
+    
+      //CALC TOTALS
+      gross = gross + amount;
+      tax = gross * .0825;
+      total = gross + tax;
+
+      grossFormat = gross.toFixed(2);
+      taxFormat = tax.toFixed(2);
+      totalFormat = total.toFixed(2);
+
+      //UPDATE SHOPING CART
+      itemsArray.push({
+        itemType: item,
+        size: selectedSize,
+        price: amount
+      });
+    }
+    
+    //RESET SIZE & INDEX SO SIZE ANIMATION CAN RERUN
+    selectedSize = null;
+    selectedIndex = null;
+    
+    //UPDATE UI
+    this.setState({
+      clickedIndex: null,
+      items: this.state.items + 1
+    });
+    
+  }
+  
+  //REMOVE ITEMS IN CHECK OUT
+  removeClick(index){
+    //REMOVE ITEM INFO
+    gross = gross - itemsArray[index].price;
+    tax = gross * .0825;
+    total = gross + tax;
+    
+    grossFormat = Math.abs(gross.toFixed(2));
+    taxFormat = Math.abs(tax.toFixed(2));
+    totalFormat = Math.abs(total.toFixed(2));
+    
+    itemsArray.splice(index, 1);
+    
+    this.setState({
+      items: this.state.items - 1
+    });
+  }
+  
+  render(){
+    return(
+      <div>
+        <Header/>
+        <div className="application">   
+
+        <div className="sidebar">
+        <div>
+          <h3>Category</h3>
+          <hr/>
+        </div>
+
+        <div className="categories">
+        <Link className="category" to="Men" >Men's</Link>
+        </div>
+
+        <div className="categories">
+        <Link className="category" to="Women">Women's</Link>
+        </div>
+
+        <div className="categories">
+        <Link className="category" to="Jewelery">Jewelery</Link>
+        </div>
+
+        <div className="categories">
+        <Link className="category" to="electronics">Electronics</Link>
+        </div>
+
+        <div>
+          <h3>Customer Support</h3>
+          <hr/>
+        </div>
+
+        <div className="categories">
+          <Link className="category" to="support">Harry from London</Link>
+        </div>
+        <div className="categories">
+          <Link className="category" to="support">John from Madrid</Link>
+        </div>
+        <div className="categories">
+          <Link className="category" to="support">Harry from London</Link>
+        </div>
+        <div className="categories">
+          <Link className="category" to="support">John from Madrid</Link>
+        </div>
+        </div>
+
+       <div id="app-container">
+        <div id="app-container-inside" className={this.state.containerSlide}>
+          <OrderScreen applicationScreenSwitch={this.screenSwitch} applicationClass={this.state.orderFade} applicationClick={this.applicationClick} applicationClickedIndex={this.state.clickedIndex} applicationIsClicked={this.state.clicked}/>
+          <CheckOut applicationScreenSwitch={this.screenSwitch} applicationRemoveClick={this.removeClick}/>
+        </div>
+      </div>
+      </div>
+
+      <Footer/>
+      </div>
+    )
+  }
+}
+
+export default Men

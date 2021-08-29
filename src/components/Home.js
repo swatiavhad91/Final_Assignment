@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from './Header';
 import Men from './Men';
+import Footer from './Footer';
 
 export default function Home() {
 
       return (
         
 <div>
+<Header/>
   <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
   <ol className="carousel-indicators">
     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active"></li>
@@ -128,7 +131,7 @@ export default function Home() {
   <img src="../Assets/shoes1.png"></img>
   <img src="../Assets/shoes2.jpg" ></img>
   </div> */}
-
+<Footer/>
 </div>
 
         

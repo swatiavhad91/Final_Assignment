@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Header from './Header';
+import Footer from './Footer';
 
 const URL1 = 'https://jsonplaceholder.typicode.com/posts';
 const URL2= ' https://jsonplaceholder.typicode.com/comments';
@@ -19,7 +21,9 @@ class Blogs extends Component {
   render() {
 
     return (
+      
       <div>
+        <Header/>
         <h1 style={{textAlign:"center"}}>Blogs</h1>
        
         <div className="col-xs-8"> 
@@ -39,8 +43,11 @@ class Blogs extends Component {
          
 
         ))}
+        
         </div>
+        <Footer/>
         </div>
+        
        
     );
   }

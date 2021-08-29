@@ -1,8 +1,12 @@
 import React from 'react'
 import "../components/Journey.css";
+import Footer from './Footer';
+import Header from './Header';
 
 export default function Our_journey() {
     return (
+      <div>
+        <Header/>
         <div className="Journey">
             <div className="icons">
                 <div style={{marginLeft:"8%"}}>
@@ -117,6 +121,8 @@ export default function Our_journey() {
             </div>
             </div>
          
+        </div>
+        <Footer/>
         </div>
     )
 }

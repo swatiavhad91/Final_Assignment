@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Header from './Header';
+import Footer from './Footer';
 
-const API_URL = 'https://fakestoreapi.com/products/category/jewelery';
+const API_URL = 'https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8';
 
-class Jewelery extends Component {
+class Support extends Component {
   state = {
     users: []
   }
@@ -19,31 +21,33 @@ class Jewelery extends Component {
 
     return (
       <div>
-        <h1 style={{textAlign:"center"}}>Jeweleries</h1>
-       <div className="jewelery_container">
-        
-        
+          <Header/>
+         <h1 style={{textAlign:"center"}}>Customer Support</h1>
+       
+         <div className="women_container">
+       
         {this.state.users.map((user) => (
+          
                  <div className="card" style={{width: "30%", marginLeft:"1%"}}>
              
            <div className="card-body">
           
-           <img  src={user.image} class="card-img-top"  alt="..." />
            
-               <h5 className="card-title">{user.title}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">{"Price : "+user.price}</h6>
-              <h6 className="card-subtitle mb-2 text-muted">{"Description : "+user.description}</h6>
+           
+               
+              <h3 className="card-subtitle mb-2 ">{"Name :  "+user.name}</h3>
+              <h6 className="card-subtitle mb-2 ">{"City : "+user.city}</h6>
               
             </div>
           </div>
           
-
+          
         ))}
         </div>
-       
-       </div>
-       
+        <Footer/>
+        </div>
+     
     );
   }
 }
-export default Jewelery;
+export default Support;
