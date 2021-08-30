@@ -12,41 +12,37 @@ class Support extends Component {
   componentDidMount() {
     const url = `${API_URL}`;
     axios.get(url).then(response => response.data)
-    .then((data) => {
-      this.setState({ users: data })
-      console.log(this.state.users)
-     })
+      .then((data) => {
+        this.setState({ users: data })
+        console.log(this.state.users)
+      })
   }
   render() {
 
     return (
       <div>
-          <Header/>
-         <h1 style={{textAlign:"center"}}>Customer Support</h1>
-       
-         <div className="women_container">
-       
-        {this.state.users.map((user) => (
-          
-                 <div className="card" style={{width: "30%", marginLeft:"1%"}}>
-             
-           <div className="card-body">
-          
-           
-           
-               
-              <h3 className="card-subtitle mb-2 ">{"Name :  "+user.name}</h3>
-              <h6 className="card-subtitle mb-2 ">{"City : "+user.city}</h6>
-              
+        <Header />
+        <h1 style={{ textAlign: "center" }}>Customer Support</h1>
+
+        <div className="women_container">
+
+          {this.state.users.map((user) => (
+
+            <div className="card" style={{ width: "30%", marginLeft: "1%" ,marginTop:"10%", marginBottom:"10%"}}>
+
+              <div className="card-body">
+                <h3 className="card-subtitle mb-2 ">{"Name :  " + user.name}</h3>
+                <h6 className="card-subtitle mb-2 ">{"City : " + user.city}</h6>
+
+              </div>
             </div>
-          </div>
-          
-          
-        ))}
+
+
+          ))}
         </div>
-        <Footer/>
-        </div>
-     
+        <Footer />
+      </div>
+
     );
   }
 }

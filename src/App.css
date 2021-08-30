@@ -211,4 +211,7 @@ width: 33%;
   flex-direction: column;
   
 }
-
+.read-more-less--more,
+.read-more-less--less {
+  color:red;
+}
